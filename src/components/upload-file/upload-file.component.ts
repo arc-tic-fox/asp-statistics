@@ -1,6 +1,6 @@
 import { Component } from '@angular/core';
 import { FileUpload, FileUploadErrorEvent, FileUploadEvent } from 'primeng/fileupload';
-import {FilesFacade} from '../../store/files';
+import { FilesFacade } from '../../store/files';
 
 @Component({
   selector: 'asp-upload-file',

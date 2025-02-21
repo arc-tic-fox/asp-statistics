@@ -1,4 +1,4 @@
-import { DataModel } from './DataModel';
+import { DataModel } from './data.model';
 
 export interface FileDataModel {
   id: number;

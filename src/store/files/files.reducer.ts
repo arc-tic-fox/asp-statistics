@@ -1,7 +1,7 @@
 import { createFeature, createReducer, on } from '@ngrx/store';
 import { FilesActions } from './files.actions';
 import { FILES_STORE } from './files.store';
-import { FileDataModel } from '../../models/FileDataModel';
+import { FileDataModel } from '../../models/file-data.model';
 
 export interface FilesStateInterface {
   files: FileDataModel[];

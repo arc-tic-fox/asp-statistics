@@ -1,0 +1,6 @@
+<div>
+  <p-check-box name="isSort" [value]="data.isSort" [binary]="true" (onChange)="onSortCheckbox($event)" />
+
+  <p-input-number name="lessThanFilter" (onInput)="onLessThan($event)" />
+  <p-input-number name="moreThanFilter" (onInput)="onMoreThan($event)" />
+</div>

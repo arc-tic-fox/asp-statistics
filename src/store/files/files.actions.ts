@@ -1,5 +1,5 @@
 import { createActionGroup, emptyProps, props } from '@ngrx/store';
-import { DataModel } from '../../models/DataModel';
+import { DataModel } from '../../models/data.model';
 import { FILES_STORE } from './files.store';
 
 export const FilesActions = createActionGroup({

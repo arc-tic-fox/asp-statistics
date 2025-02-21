@@ -1,6 +1,6 @@
 import { createFeatureSelector, createSelector } from '@ngrx/store';
 import { FILES_STORE } from './files.store';
-import { FileDataModel } from '../../models/FileDataModel';
+import { FileDataModel } from '../../models/file-data.model';
 
 
 export const selectFilesState =
