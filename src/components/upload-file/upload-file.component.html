@@ -1,0 +1,13 @@
+<div class="upload-file">
+  <p-fileupload
+    mode="basic"
+    name="file[]"
+    url="https://www.primefaces.org/cdn/api/upload.php"
+    chooseLabel="Browse"profile
+    accept=".json"
+    [auto]="true"
+    [maxFileSize]="maxFileSize"
+    (onUpload)="uploadSuccess($event)"
+    (onError)="uploadError($event)"
+  />
+</div>
