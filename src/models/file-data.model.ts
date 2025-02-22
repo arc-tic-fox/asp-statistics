@@ -3,7 +3,7 @@ import { DataModel } from './data.model';
 export interface FileDataModel {
   id: number;
   name: string;
-  data: DataModel;
+  data: DataModel[];
   uploadDate: string;
   isCurrent: boolean;
 }

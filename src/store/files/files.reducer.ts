@@ -4,15 +4,15 @@ import { FILES_STORE } from './files.store';
 import { FileDataModel } from '../../models/file-data.model';
 
 export interface FilesStateInterface {
-  files: FileDataModel[];
+  [FILES_STORE]: FileDataModel[];
 }
 
 export const filesInitialState: FilesStateInterface = {
-  files: [],
+  [FILES_STORE]: [],
 };
 
 export const filesFeature = createFeature({
-  name: FILES_STORE,
+  name: 'asp-statistics-store',
   reducer: createReducer(
     filesInitialState,
     on(FilesActions.add,
@@ -20,14 +20,14 @@ export const filesFeature = createFeature({
         ...state,
         files: [
           { id: new Date().getTime(), name, isCurrent: true, data, uploadDate: new Date().getTime().toString() },
-          ...state.files.slice(0, 3),
+          ...state.files.map(item => ({ ...item, isCurrent: false })).slice(0, 4),
         ],
       }),
     ),
     on(FilesActions.setCurrentFile,
       (state, { id }) => ({
         ...state,
-        files: state.files.map(item => ({...item , current: item.id === id})),
+        files: state.files.map(item => ({...item , isCurrent: item.id === id})),
       }),
     ),
     on(FilesActions.deleteById,

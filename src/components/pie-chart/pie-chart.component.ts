@@ -1,4 +1,4 @@
-import { ChangeDetectionStrategy, Component, Input, OnInit } from '@angular/core';
+import { ChangeDetectionStrategy, Component, Input, OnChanges, OnInit, SimpleChanges } from '@angular/core';
 import { DataModel } from '../../models/data.model';
 import { pieChartConfig } from './pie-chart.config';
 import { ChartDataFilterComponent } from '../chart-data-filter/chart-data-filter.component';
@@ -13,8 +13,9 @@ import * as d3 from 'd3';
   imports: [
     ChartDataFilterComponent,
   ],
+  styleUrl: './pie-chart.component.less',
 })
-export class PieChartComponent implements OnInit {
+export class PieChartComponent implements OnInit, OnChanges {
 
   constructor(private filterDataService: FilterDataService) {  }
 
@@ -25,6 +26,12 @@ export class PieChartComponent implements OnInit {
 
   ngOnInit(): void {
     this.init();
+  }
+
+  ngOnChanges(changes: SimpleChanges): void {
+    if (changes['data'].currentValue) {
+      this.init();
+    }
   }
 
   changedFilters(filters: FilterDataModel): void {
@@ -58,9 +65,9 @@ export class PieChartComponent implements OnInit {
       .domain(this.filteredData.map(d => d.category))
       .range(d3.quantize(t => d3.interpolateSpectral(t * 0.8 + 0.1), this.filteredData.length).reverse());
 
-    d3.select('.pie-chart').select('svg').remove();
+    d3.select('.pie-chart__container').select('svg').remove();
 
-    const svg = d3.select('.pie-chart').append('svg')
+    const svg = d3.select('.pie-chart__container').append('svg')
       .attr("width", width)
       .attr("height", width)
       .attr("viewBox", [-width / 2, -width / 2, width, width])

@@ -1,4 +1,4 @@
-import { ChangeDetectionStrategy, Component, Input, OnInit } from '@angular/core';
+import { ChangeDetectionStrategy, Component, Input, OnChanges, OnInit, SimpleChanges } from '@angular/core';
 import { DataModel } from '../../models/data.model';
 import { barChartConfig } from './bar-chart.config';
 import { ChartDataFilterComponent } from '../chart-data-filter/chart-data-filter.component';
@@ -13,8 +13,9 @@ import * as d3 from 'd3';
   imports: [
     ChartDataFilterComponent,
   ],
+  styleUrl: './bar-chart.component.less',
 })
-export class BarChartComponent implements OnInit {
+export class BarChartComponent implements OnInit, OnChanges {
 
   constructor(private filterDataService: FilterDataService) {  }
 
@@ -25,6 +26,12 @@ export class BarChartComponent implements OnInit {
 
   ngOnInit(): void {
     this.init();
+  }
+
+  ngOnChanges(changes: SimpleChanges): void {
+    if (changes['data'].currentValue) {
+      this.init();
+    }
   }
 
   changedFilters(filters: FilterDataModel): void {
@@ -44,7 +51,7 @@ export class BarChartComponent implements OnInit {
     const height = barChartConfig.height;
 
     const rate = Math.round(height / (
-      [...this.filteredData].sort((a, b) => b.value - a.value)?.[0]?.value || height) - 1);
+      [...this.filteredData].sort((a, b) => b.value - a.value)?.[0]?.value || height));
     const barWidth = (Math.max(1, Math.round(width / this.filteredData.length)));
     const barWidthRate = barChartConfig.barWidthRate;
 
@@ -53,9 +60,9 @@ export class BarChartComponent implements OnInit {
       .range(d3.quantize(t => d3.interpolateSpectral(t * 0.8 + 0.1), this.filteredData.length).reverse());
 
 
-    d3.select('.bar-chart').select('svg').remove();
+    d3.select('.bar-chart__container').select('svg').remove();
 
-    const svg = d3.select('.bar-chart').append('svg')
+    const svg = d3.select('.bar-chart__container').append('svg')
       .attr('width', width)
       .attr('height', height);
 

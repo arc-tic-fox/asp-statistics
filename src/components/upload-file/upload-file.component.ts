@@ -17,7 +17,6 @@ export class UploadFileComponent {
   uploadSuccess(event: FileUploadEvent): void {
     event.files[0].text().then((data) => {
       this.fileFacade.add(event.files[0].name, JSON.parse(data));
-      console.log(JSON.parse(data));
     });
   }
 

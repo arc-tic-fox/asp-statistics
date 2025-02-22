@@ -1,6 +1,27 @@
-<div>
-  <p-check-box name="isSort" [value]="data.isSort" [binary]="true" (onChange)="onSortCheckbox($event)" />
+<div class="chart-data-filter">
+  <div class="chart-data-filter__input-wrapper">
+    <label for="checkboxId"> Сортировать категории </label>
+    <p-check-box id="checkboxId" name="isSort"
+                 [value]="data.isSort" [binary]="true" (onChange)="onSortCheckbox($event)" />
+  </div>
 
-  <p-input-number name="lessThanFilter" (onInput)="onLessThan($event)" />
-  <p-input-number name="moreThanFilter" (onInput)="onMoreThan($event)" />
+  <div class="chart-data-filter__input-wrapper">
+    <label for="ltId"> Отфильтровать категории меньше чем (<=) </label>
+    <p-input-number
+      id="ltId"
+      name="lessThanFilter"
+      [inputStyle]="{ 'padding': '4px 6px', 'width': '80px' }"
+      (onInput)="onLessThan($event)"
+    />
+  </div>
+
+  <div class="chart-data-filter__input-wrapper">
+    <label for="mtId"> Отфильтровать категории больше чем (>=) </label>
+    <p-input-number
+      id="mtId"
+      name="moreThanFilter"
+      [inputStyle]="{ 'padding': '4px 6px', 'width': '80px' }"
+      (onInput)="onMoreThan($event)"
+    />
+  </div>
 </div>

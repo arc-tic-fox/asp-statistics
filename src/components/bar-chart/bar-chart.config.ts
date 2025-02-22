@@ -1,6 +1,6 @@
 export const barChartConfig = {
-  width: 500,
-  height: 500,
+  width: 400,
+  height: 400,
 
   barWidthRate: 0.9,
 }

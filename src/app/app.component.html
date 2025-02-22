@@ -1,9 +1,22 @@
 <main class="main">
-  <asp-upload-file></asp-upload-file>
+  <div class="main__first-column">
+    <div class="main__buttons">
+      <asp-upload-file></asp-upload-file>
 
-  <asp-pie-chart [data]="data"></asp-pie-chart>
+      <p-button (click)="deleteAll()"><span class="pi pi-trash"></span> Delete All</p-button>
+    </div>
 
-  <asp-bar-chart [data]="data"></asp-bar-chart>
+    <div class="main__table">
+      <asp-files-table></asp-files-table>
+    </div>
+  </div>
+
+  <div class="main__second-column">
+    @if (data) {
+      <asp-pie-chart [data]="data"></asp-pie-chart>
+      <asp-bar-chart [data]="data"></asp-bar-chart>
+    }
+  </div>
 </main>
 
 <router-outlet />

@@ -13,13 +13,17 @@ export class FilesFacade {
   current$: Observable<FileDataModel[]>;
   allFiles$: Observable<FileDataModel[]>;
 
-  constructor(private readonly store: Store) {
+  constructor(private store: Store) {
     this.current$ = this.store.select(selectCurrentData);
     this.allFiles$ = this.store.select(selectAll);
   }
 
-  add(name: string, data: DataModel): void {
+  add(name: string, data: DataModel[]): void {
     this.store.dispatch(FilesActions.add({ name, data }));
+  }
+
+  selectCurrent(id: number): void {
+    this.store.dispatch(FilesActions.setCurrentFile({ id }));
   }
 
   delete(id: number): void {

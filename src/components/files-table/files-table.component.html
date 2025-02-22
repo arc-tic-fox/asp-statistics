@@ -1,0 +1,17 @@
+<p-table class="table" [value]="files" size="small">
+  <ng-template #header>
+    <tr>
+      <th class="table__header-date">Upload Date</th>
+      <th>File Name</th>
+      <th class="table__header-delete"></th>
+    </tr>
+  </ng-template>
+
+  <ng-template #body let-item>
+    <tr class="{{item.isCurrent ? 'selected' : ''}}" (click)="selectCurrent(item.id)">
+      <td>{{ item.uploadDate | date: 'd MMM y h:mm:ss' }}</td>
+      <td>{{ item.name }}</td>
+      <td><span (click)="delete(item.id)" class="pi pi-trash"></span></td>
+    </tr>
+  </ng-template>
+</p-table>

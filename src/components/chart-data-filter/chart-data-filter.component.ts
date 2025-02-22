@@ -10,6 +10,7 @@ import { FilterDataModel } from '../../models/filter-data.model';
     InputNumber,
   ],
   templateUrl: './chart-data-filter.component.html',
+  styleUrl: './chart-data-filter.component.less'
 })
 export class ChartDataFilterComponent {
 
