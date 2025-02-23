@@ -19,9 +19,22 @@ export const filesFeature = createFeature({
       (state, { name, data }) => ({
         ...state,
         files: [
-          { id: new Date().getTime(), name, isCurrent: true, data, uploadDate: new Date().getTime().toString() },
+          {
+            id: new Date().getTime(),
+            name,
+            isCurrent: true,
+            data,
+            filters: { isSort: false, category: null, lessThan: null, moreThan: null },
+            uploadDate: new Date().getTime().toString(),
+          },
           ...state.files.map(item => ({ ...item, isCurrent: false })).slice(0, 4),
         ],
+      }),
+    ),
+    on(FilesActions.updateFilters,
+      (state, { id, filters }) => ({
+        ...state,
+        files: state.files.map(item => ({...item , filters: item.id === id ? filters : item.filters })),
       }),
     ),
     on(FilesActions.setCurrentFile,

@@ -1,13 +1,15 @@
 <div class="upload-file">
+  <p-toast />
   <p-fileupload
     mode="basic"
     name="file[]"
     url="https://www.primefaces.org/cdn/api/upload.php"
-    chooseLabel="Browse"profile
+    chooseLabel="Browse"
     accept=".json"
+    chooseStyleClass="p-button-sm"
     [auto]="true"
     [maxFileSize]="maxFileSize"
-    (onUpload)="uploadSuccess($event)"
-    (onError)="uploadError($event)"
+    (onUpload)="upload($event)"
+    (onError)="error()"
   />
 </div>

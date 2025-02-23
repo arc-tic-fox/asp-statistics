@@ -1,27 +1,25 @@
 import { ChangeDetectionStrategy, Component, Input, OnChanges, OnInit, SimpleChanges } from '@angular/core';
 import { DataModel } from '../../models/data.model';
 import { barChartConfig } from './bar-chart.config';
-import { ChartDataFilterComponent } from '../chart-data-filter/chart-data-filter.component';
-import { FilterDataModel } from '../../models/filter-data.model';
 import { FilterDataService } from '../../services/filter-data.service';
+import { FilesFacade } from '../../store/files';
 import * as d3 from 'd3';
 
 @Component({
   selector: 'asp-bar-chart',
   templateUrl: './bar-chart.component.html',
   changeDetection: ChangeDetectionStrategy.OnPush,
-  imports: [
-    ChartDataFilterComponent,
-  ],
   styleUrl: './bar-chart.component.less',
 })
 export class BarChartComponent implements OnInit, OnChanges {
 
-  constructor(private filterDataService: FilterDataService) {  }
+  constructor(
+    private filesFacade: FilesFacade,
+    private filterDataService: FilterDataService,
+  ) {  }
 
   @Input() data: DataModel[] = [];
 
-  private filters: FilterDataModel = { isSort: false, lessThan: null, moreThan: null };
   private filteredData: DataModel[] = [];
 
   ngOnInit(): void {
@@ -34,16 +32,14 @@ export class BarChartComponent implements OnInit, OnChanges {
     }
   }
 
-  changedFilters(filters: FilterDataModel): void {
-    this.filters = filters;
-
-    this.init();
-  }
-
   private init(): void {
-    this.filteredData = this.filterDataService.updateFilteredData(this.data, this.filters);
+    this.filesFacade.current$.subscribe(item => {
+      if (item) {
+        this.filteredData = this.filterDataService.updateFilteredData(this.data, item.filters);
+      }
 
-    this.createBarChart();
+      this.createBarChart();
+    });
   }
 
   private createBarChart(): void {

@@ -1,27 +1,49 @@
 <div class="chart-data-filter">
-  <div class="chart-data-filter__input-wrapper">
-    <label for="checkboxId"> Сортировать категории </label>
-    <p-check-box id="checkboxId" name="isSort"
-                 [value]="data.isSort" [binary]="true" (onChange)="onSortCheckbox($event)" />
-  </div>
+  <form [formGroup]="formGroup">
+    <div class="chart-data-filter__input-wrapper">
+      <label for="checkboxId">Sort by values: </label>
+      <p-check-box
+        id="checkboxId"
+        formControlName="isSort"
+        [binary]="true"
+        (onChange)="onSort()"
+      />
+    </div>
 
-  <div class="chart-data-filter__input-wrapper">
-    <label for="ltId"> Отфильтровать категории меньше чем (<=) </label>
-    <p-input-number
-      id="ltId"
-      name="lessThanFilter"
-      [inputStyle]="{ 'padding': '4px 6px', 'width': '80px' }"
-      (onInput)="onLessThan($event)"
-    />
-  </div>
+    <div class="chart-data-filter__input-wrapper">
+      <label for="catId">Filter by categories: </label>
+      <input
+        pInputText
+        id="catId"
+        formControlName="category"
+        [style]="{ 'padding': '4px 6px', 'width': '160px' }"
+        (input)="onCategory()"
+      />
+    </div>
 
-  <div class="chart-data-filter__input-wrapper">
-    <label for="mtId"> Отфильтровать категории больше чем (>=) </label>
-    <p-input-number
-      id="mtId"
-      name="moreThanFilter"
-      [inputStyle]="{ 'padding': '4px 6px', 'width': '80px' }"
-      (onInput)="onMoreThan($event)"
-    />
-  </div>
+    <div class="chart-data-filter__input-wrapper">
+      <label for="ltId">Filter values from: </label>
+      <p-input-number
+        id="ltId"
+        formControlName="lessThanFilter"
+        [inputStyle]="{ 'padding': '4px 6px', 'width': '80px' }"
+        (onInput)="onLessThan()"
+      />
+    </div>
+
+    <div class="chart-data-filter__input-wrapper">
+      <label for="mtId">Filter values to: </label>
+      <p-input-number
+        id="mtId"
+        formControlName="moreThanFilter"
+        [inputStyle]="{ 'padding': '4px 6px', 'width': '80px' }"
+        (onInput)="onMoreThan()"
+      />
+    </div>
+
+    <div class="chart-data-filter__input-wrapper">
+      <span></span>
+      <p-button styleClass="p-button-sm" (click)="clear()">Clear All</p-button>
+    </div>
+  </form>
 </div>

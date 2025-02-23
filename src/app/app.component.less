@@ -10,14 +10,32 @@
   &__first-column {
     display: flex;
     flex-direction: column;
-    align-items: center;
+    align-items: end;
     justify-content: flex-start;
+    gap: 8px;
     width: 50%;
-    min-height: 537px;
-    background: white;
-    padding: 24px;
-    border-radius: 2px;
-    box-shadow: 0 4px 24px rgba(0, 0, 0, 0.16);
+
+    .card {
+      min-width: 440px;
+      min-height: 300px;
+      background: white;
+      padding: 24px;
+      border-radius: 2px;
+      box-shadow: 0 4px 24px rgba(0, 0, 0, 0.16);
+
+      .buttons {
+        display: flex;
+        align-items: center;
+        justify-content: end;
+        gap: 8px;
+        width: 100%;
+        margin-bottom: 12px;
+      }
+
+      //.table {
+      //  width: 100%;
+      //}
+    }
   }
 
   &__second-column {
@@ -27,18 +45,5 @@
     justify-content: center;
     gap: 8px;
     width: 50%;
-  }
-
-  &__buttons {
-    display: flex;
-    align-items: center;
-    justify-content: end;
-    gap: 8px;
-    width: 100%;
-    margin-bottom: 12px;
-  }
-
-  &__table {
-    width: 100%;
   }
 }
